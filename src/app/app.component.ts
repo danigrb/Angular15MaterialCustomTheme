@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'app';
 
     constructor(appConfig: ConfigService) {
-      this.title = appConfig.data.title??'app';
-      console.log(appConfig.data);
+      this.title = appConfig.getConfig("title")??'app';
+      console.log(appConfig.getConfig("title"));
   }
 }

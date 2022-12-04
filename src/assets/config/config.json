@@ -1,0 +1,8 @@
+{
+    "title": "My application",
+    "keycloak_url":"http://localhost:8080/auth",
+    "activate_keycloak": true,
+    "keycloak_realm": "miriaminfiore",
+    "keycloak_client_id": "home"
+  
+}

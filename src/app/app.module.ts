@@ -16,11 +16,43 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from './services/config.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 export function setupConfigServiceFactory(
   service: ConfigService
 ): Function {
   return () => service.load();
+}
+   
+export function initializeKeycloakConfigMap(keycloak: KeycloakService,configService : ConfigService) {
+  return ()=>  configService.init().then(res =>  {
+    
+            return res["activate_keycloak"]?
+                    keycloak.init({
+                    config: {
+                      url: res["keycloak_url"],
+                      realm:  res["keycloak_realm"],
+                      clientId:  res["keycloak_client_id"],
+                    },
+                    initOptions: {
+                      onLoad: 'login-required',
+                      silentCheckSsoRedirectUri:
+                        window.location.origin + '/assets/silent-check-sso.html',
+                    },
+                  })
+                  :true;
+        }
+      );
+
+}
+const configServiceFactory = (httpClient : HttpClient) => {
+  return new ConfigService(httpClient);
+};
+export let configurationServiceProvider = 
+{
+  provide: ConfigService,
+  useFactory: configServiceFactory,
+  deps: [HttpClient],
 }
 
 @NgModule({
@@ -42,18 +74,18 @@ export function setupConfigServiceFactory(
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    KeycloakAngularModule
   ],
-  providers: [
+  providers: [configurationServiceProvider,
     {
-        provide: APP_INITIALIZER,
-        useFactory: setupConfigServiceFactory,
-        deps: [
-            ConfigService
-        ],
-        multi: true
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloakConfigMap,
+      multi: true,
+      deps: [KeycloakService,ConfigService],
     }
   ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule { }

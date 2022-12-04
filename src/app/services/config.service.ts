@@ -1,31 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Config } from './interface/config';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ConfigService {
 
-  data: Config = {};
+@Injectable()
+export  class ConfigService {
+  constructor(private httpClient: HttpClient){
+    this.load();}
 
-  constructor(private http: HttpClient) {}
+  private config: any;
 
-  load(defaults?: Config): Promise<Config> {
-    return new Promise<Config>(resolve => {
-      this.http.get('assets/config.json').subscribe(
-        response => {
-          console.log('using server-side configuration');
-          this.data = Object.assign({}, defaults || {}, response || {});
-          resolve(this.data);
-        },
-        () => {
-          console.log('using default configuration');
-          this.data = Object.assign({}, defaults || {});
-          resolve(this.data);
-        }
-      );
+  /**
+   * Use to get the data found in config file
+   */
+   public getConfig(key: any) {
+    return this.config[key];
+  }
+  public setConfig(config: any) {
+   return this.config = config;
+ }
+ public init() {
+  return this.httpClient.get<any>("../assets/config/config.json").toPromise();
+}
+  public load() {
+    return this.httpClient.get("../assets/config/config.json").subscribe(data=>{
+      console.log(data);
+      this.setConfig(data);
+      
+    }, error=>{
+      
+      console.error("Error in keycloak initialitation "+error.valueOf());
     });
   }
 
+  
+ 
 }
+
