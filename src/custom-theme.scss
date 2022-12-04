@@ -47,5 +47,5 @@ $frontend-theme: mat.define-light-theme((
 @include mat.all-component-themes($frontend-theme);
 @include mat.all-component-typographies($custom-typography);
 
-html, body { height: 100%; }
+html, body { height: 100%; font-size: 62,5%;}
 body { margin: 0; }
