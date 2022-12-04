@@ -18,6 +18,20 @@
 $custom-typography: mat.define-typography-config(
   $font-family: "'Playfair Display'"
 );
+
+
+$raspberry-palette: (
+  50: #ad1457,
+  100: #ad1457,
+  200: #ad1457,
+  300: #ad1457,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+  )
+ );
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -37,6 +51,8 @@ $frontend-theme: mat.define-light-theme((
   ),
   typography: ($custom-typography),
 ));
+
+
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
