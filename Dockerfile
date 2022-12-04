@@ -7,6 +7,6 @@ FROM arm64v8/nginx:latest
 RUN rm -rf /usr/share/nginx/html/*
 # Copy the build output to replace the default nginx contents.
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY  ./dist/fhtcommerce /usr/share/nginx/html
+COPY  ./dist/frontend /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
