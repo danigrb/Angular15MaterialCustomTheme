@@ -10,28 +10,93 @@
 @font-face {
   font-family: 'Playfair Display';
   src: url(./assets/fonts/PlayfairDisplay-Regular.ttf) format("truetype");
-  font-weight:400;
+  font-weight:600;
 }
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 $custom-typography: mat.define-typography-config(
-  $font-family: "'Playfair Display'"
+  $font-family: "'Playfair Display'",
+  $headline-1: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $headline-2: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 3.6rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $headline-3: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 3rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $headline-4: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 2.4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $headline-5: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.8rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $headline-6: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.6rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $subtitle-1: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.6rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $subtitle-2:  mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $body-1: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $body-2: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.8rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $caption: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal),
+  $button: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
+  $overline: mat.define-typography-level(
+    $font-family: "'Playfair Display'",
+    $font-weight: 600,
+    $font-size: 1.4rem,
+    $line-height: 1.5,
+    $letter-spacing: normal,),
 );
 
-
-$raspberry-palette: (
-  50: #ad1457,
-  100: #ad1457,
-  200: #ad1457,
-  300: #ad1457,
-  contrast: (
-    50: white,
-    100: white,
-    200: white,
-    300: white,
-  )
- );
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -59,6 +124,5 @@ $frontend-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($frontend-theme);
 @include mat.all-component-typographies($custom-typography);
-
-html, body { height: 100%; }
-body { margin: 0; }
+html, body { height: 100%; font-size: 62,5%;}
+body { margin: 0; font-size: 1.6rem;}

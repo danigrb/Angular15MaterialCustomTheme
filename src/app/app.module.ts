@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,13 @@ import { HomeComponent } from './home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { ConfigService } from './services/config.service';
+import { HttpClientModule } from '@angular/common/http';
+export function setupConfigServiceFactory(
+  service: ConfigService
+): Function {
+  return () => service.load();
+}
 
 @NgModule({
   declarations: [
@@ -34,9 +41,19 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+        provide: APP_INITIALIZER,
+        useFactory: setupConfigServiceFactory,
+        deps: [
+            ConfigService
+        ],
+        multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
